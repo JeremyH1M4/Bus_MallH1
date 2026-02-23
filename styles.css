@@ -1,0 +1,31 @@
+body { 
+    background-color: black;
+}
+
+#A1 {
+    display:absolute;
+    margin:auto;
+    text-align: center;
+
+}
+
+h1 {
+    color:cyan;
+}
+
+#A2 {
+    display:absolute;
+    text-align: end;
+}
+
+#Container {
+    display: grid;
+    margin-top: 175px;
+    grid-template-columns: 0.5fr 0.4fr 0.5fr;
+    align-items: center;
+    justify-items: center;
+}
+
+p {
+    color:cyan
+}

@@ -1,0 +1,37 @@
+body {
+    background-color: black;
+}
+
+#B1 {
+    display: absolute;
+    margin: auto;
+    text-align: start;
+}
+
+h1 {
+    color: cyan;
+}
+
+#B2 {
+    display: absolute;
+    text-align: center;
+}
+
+#Percent {
+    display: grid;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    align-items: center;
+    justify-items: center;
+    border: 2px solid cyan;
+    height: 50px;
+}
+
+#Graph {
+    border: 2px solid cyan;
+    height: 300px;
+}
+
+p {
+    color: cyan;
+}
