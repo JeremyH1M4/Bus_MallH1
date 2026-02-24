@@ -29,3 +29,13 @@ h1 {
 p {
     color:cyan
 }
+
+#img1 {
+    border: 1px solid cyan;
+}
+#img2 {
+    border: 1px solid cyan;
+}
+#img3 {
+    border: 1px solid cyan;
+}
