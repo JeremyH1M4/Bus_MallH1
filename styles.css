@@ -11,6 +11,9 @@ body {
 
 h1 {
     color:cyan;
+      font-family: "Courier Prime", monospace;
+  font-weight: 400;
+  font-style: normal;
 }
 
 #A2 {
@@ -27,7 +30,10 @@ h1 {
 }
 
 p {
-    color:cyan
+    color:cyan;
+      font-family: "Courier Prime", monospace;
+  font-weight: 400;
+  font-style: normal;
 }
 
 #img1 {
