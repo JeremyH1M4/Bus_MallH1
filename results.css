@@ -1,0 +1,10 @@
+body {
+    background-color: black;
+}
+
+h1 {
+    color: cyan;
+    font-family: "Courier Prime", monospace;
+  font-weight: 400;
+  font-style: normal;
+}

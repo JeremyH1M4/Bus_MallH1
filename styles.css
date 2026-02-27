@@ -36,12 +36,18 @@ p {
   font-style: normal;
 }
 
-#img1 {
+#img1{
     border: 1px solid cyan;
+    height: 350px;
+    width: 400px;
 }
 #img2 {
     border: 1px solid cyan;
+    height: 350px;
+    width: 400px;
 }
 #img3 {
     border: 1px solid cyan;
+    height: 350px;
+    width: 400px;
 }

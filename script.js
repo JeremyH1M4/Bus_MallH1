@@ -1,11 +1,7 @@
-const BT = document.getElementById("A2");
-BT.addEventListener("click", function() {
-    window.location.href = "page.html";
-});
-
+'use strict'
 //array for 3 baseplate images
 
-const divImage = document.getElementById("Container");
+const div = document.getElementById("Container");
 const img1 = document.getElementById("img1");
 const img2 = document.getElementById("img2");
 const img3 = document.getElementById("img3");
@@ -13,7 +9,7 @@ let count = 0;
 
 // Constructor function for images
 
-function img(name, imagepath) {
+function Images(name, imagepath) {
     this.name = name;
     this.imagepath = imagepath;
     this.clicks = 0;
@@ -23,32 +19,32 @@ function img(name, imagepath) {
 // Array to hold all images
 Images.allImages = [];
 
-Images.allImages.push(new img("bag", "./images/bag.jpg"));
-Images.allImages.push(new img("banana", "./images/banana.jpg"));
-Images.allImages.push(new img("bathroom", "./images/bathroom.jpg"));
-Images.allImages.push(new img("boots", "./images/boots.jpg"));
-Images.allImages.push(new img("breakfast", "./images/breakfast.jpg"));
-Images.allImages.push(new img("bubblegum", "./images/bubblegum.jpg"));
-Images.allImages.push(new img("chair", "./images/chair.jpg"));
-Images.allImages.push(new img("cthulhu", "./images/cthulhu.jpg"));
-Images.allImages.push(new img("dog-duck", "./images/dog-duck.jpg"));
-Images.allImages.push(new img("dragon", "./images/dragon.jpg"));
-Images.allImages.push(new img("pen", "./images/pen.jpg"));
-Images.allImages.push(new img("pet-sweep", "./images/pet-sweep.jpg"));
-Images.allImages.push(new img("scissors", "./images/scissors.jpg"));
-Images.allImages.push(new img("shark", "./images/shark.jpg"));
-Images.allImages.push(new img("sweep", "./images/sweep.jpg"));
-Images.allImages.push(new img("tauntaun", "./images/tauntaun.jpg"));
-Images.allImages.push(new img("unicorn", "./images/unicorn.jpg"));
-Images.allImages.push(new img("water-can", "./images/water-can.jpg"));
-Images.allImages.push(new img("wine-glass", "./images/wine-glass.jpg"));
-Images.allImages.push(new img("shark", "./images/.jpg"));
+Images.allImages.push(new Images("bag", "./images/bag.jpg"));
+Images.allImages.push(new Images("banana", "./images/banana.jpg"));
+Images.allImages.push(new Images("bathroom", "./images/bathroom.jpg"));
+Images.allImages.push(new Images("boots", "./images/boots.jpg"));
+Images.allImages.push(new Images("breakfast", "./images/breakfast.jpg"));
+Images.allImages.push(new Images("bubblegum", "./images/bubblegum.jpg"));
+Images.allImages.push(new Images("chair", "./images/chair.jpg"));
+Images.allImages.push(new Images("cthulhu", "./images/cthulhu.jpg"));
+Images.allImages.push(new Images("dog-duck", "./images/dog-duck.jpg"));
+Images.allImages.push(new Images("dragon", "./images/dragon.jpg"));
+Images.allImages.push(new Images("pen", "./images/pen.jpg"));
+Images.allImages.push(new Images("pet-sweep", "./images/pet-sweep.jpg"));
+Images.allImages.push(new Images("scissors", "./images/scissors.jpg"));
+Images.allImages.push(new Images("shark", "./images/shark.jpg"));
+Images.allImages.push(new Images("sweep", "./images/sweep.png"));
+Images.allImages.push(new Images("tauntaun", "./images/tauntaun.jpg"));
+Images.allImages.push(new Images("unicorn", "./images/unicorn.jpg"));
+Images.allImages.push(new Images("water-can", "./images/water-can.jpg"));
+Images.allImages.push(new Images("wine-glass", "./images/wine-glass.jpg"));
 
+console.log(Images.allImages);
 
 //render images
-Images.Prototype.renderImage = function(image, tile){
+Images.prototype.renderImage = function(image){
     image.src = this.imagepath;
-    title.context = this.name;
+    image.alt = this.name;
     this.views++;
 }
 
@@ -59,12 +55,12 @@ function randomizeArray() {
 
 function getThreeImages(){
     randomizeArray();
-  let img1 = Images.allImages[0];
-  let img2 = Images.allImages[1];
-  let img3 = Images.allImages[2];
-  img1.renderImages(imgContainer1);
-  img2.renderImages(imgContainer2,);
-  img3.renderImages(imgContainer3,);
+  let image1 = Images.allImages [0];
+  let image2 = Images.allImages [1];
+  let image3 = Images.allImages [2];
+  image1.renderImage(img1);
+  image2.renderImage(img2);
+  image3.renderImage(img3);
 };
 
 //Input array in storage
@@ -110,9 +106,9 @@ function handleClick(E){
         Images.allImages[2].clicks++;
     } 
     getThreeImages(); 
-    if (count === 5){
+    if (count === 35){
         removeImages();
-        document.write('<h1>Survey Concluded</h1>');
+    window.location.href = "results.html";
         console.log(Images.allImages);
     }
     putArrayInStorage();
@@ -120,7 +116,7 @@ function handleClick(E){
 
 
 
-mainContainer.addEventListener('click', handleClick);
+Container.addEventListener('click', handleClick);
 console.log(Images);
 getArrayFromStorage();
 getThreeImages();
