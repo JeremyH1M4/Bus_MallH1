@@ -1,29 +1,32 @@
-body { 
+body {
     background-color: black;
+    /* give space for the fixed header so content doesn't get covered */
+    padding-top: 100px; /* adjust if your header is taller/shorter */
 }
 
 #A1 {
-    display:absolute;
-    margin:auto;
+    position: fixed;
+    top: 12px;
     text-align: center;
-
+    width: 100%;
 }
 
 h1 {
-    color:cyan;
-      font-family: "Courier Prime", monospace;
-  font-weight: 400;
-  font-style: normal;
+        color: cyan;
+        font-family: "Courier Prime", monospace;
+        font-weight: 400;
+        font-style: normal;
+        margin: 0;
 }
 
 #A2 {
-    display:absolute;
+    position: absolute;
     text-align: end;
 }
 
-#Container {
+#container {
     display: grid;
-    margin-top: 175px;
+    margin-top: 0; /* body padding-top handles spacing for the header */
     grid-template-columns: 0.5fr 0.4fr 0.5fr;
     align-items: center;
     justify-items: center;
@@ -51,3 +54,4 @@ p {
     height: 350px;
     width: 400px;
 }
+

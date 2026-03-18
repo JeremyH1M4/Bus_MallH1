@@ -1,7 +1,7 @@
 'use strict'
 //array for 3 baseplate images
 
-const div = document.getElementById("Container");
+const container = document.getElementById("container");
 const img1 = document.getElementById("img1");
 const img2 = document.getElementById("img2");
 const img3 = document.getElementById("img3");
@@ -9,12 +9,12 @@ let count = 0;
 
 // Constructor function for images
 
-function Images(name, imagepath) {
+function Images(name, imgPath) {
     this.name = name;
-    this.imagepath = imagepath;
+    this.imgPath = imgPath;
     this.clicks = 0;
     this.views = 0;
-}
+};
 
 // Array to hold all images
 Images.allImages = [];
@@ -43,7 +43,7 @@ console.log(Images.allImages);
 
 //render images
 Images.prototype.renderImage = function(image){
-    image.src = this.imagepath;
+    image.src = this.imgPath;
     image.alt = this.name;
     this.views++;
 }
@@ -65,11 +65,9 @@ function getThreeImages(){
 
 //Input array in storage
 function putArrayInStorage(){
-    let stringArray = JSON.stringify(Images.allImages);
-    if (stringArray = []){
-        localStorage.setItem('images', stringArray);
-    }
-    else(localStorage.setItem('images', stringArray));
+  // Always save the current Images.allImages array
+  const stringArray = JSON.stringify(Images.allImages);
+  localStorage.setItem('images', stringArray);
 }
 
 // Output array from storage
@@ -90,9 +88,66 @@ function removeImages(){
     document.getElementById('img3').style.display = 'none';
 }
 
+function makeItemChart() {
+  var ctx = document.getElementById('myCanvas').getContext('2d');
+    let imageNames = []
+    let imageClicks = []
+    let imageViews = []
+
+
+for(let image of Images.allImages){
+    imageNames.push(image.name);
+    imageClicks.push(image.clicks);
+    imageViews.push(image.views);
+}
+
+const data = {
+  labels: imageNames,
+  datasets: [
+    {
+      label: 'clicks',
+      data: image.Clicks,
+      borderColor: 'rgba(251, 0, 0, 1)',
+      backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      borderWidth: 1,
+    },
+    {
+      label: 'views',
+      data: image.Views,
+      borderColor: 'rgba(99, 99, 255, 1)',
+      backgroundColor: 'rgba(99, 132, 255, 0.5)',
+      borderWidth: 1,
+    }
+  ]
+};
+
+// Chart configuration
+const config = {
+  type: 'bar',
+  data: data,
+  options: {
+    indexAxis: 'y',
+    elements: {
+      bar: {
+        borderWidth: 2,
+      }
+    },
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'right',
+      },
+      title: {
+        display: true,
+        text: 'Tank Horsepower and Armor Comparison'
+      }
+    }
+  },
+};
+}
 //Changes/randomizes image
 function handleClick(E){
-    let imageClicked = E.target.id;
+    const imageClicked = E.target.id;
     if(imageClicked === 'img1' || imageClicked === 'img2' || imageClicked === 'img3'){
         count++;
     }
@@ -106,17 +161,19 @@ function handleClick(E){
         Images.allImages[2].clicks++;
     } 
     getThreeImages(); 
-    if (count === 35){
+    if (count === 5){
         removeImages();
-    window.location.href = "results.html";
         console.log(Images.allImages);
-    }
-    putArrayInStorage();
+
+        putArrayInStorage();
+    getArrayFromStorage();
+    makeItemChart();
+}
 }
 
-
-
-Container.addEventListener('click', handleClick);
+if (container) container.addEventListener('click', handleClick);
 console.log(Images);
 getArrayFromStorage();
 getThreeImages();
+
+;
