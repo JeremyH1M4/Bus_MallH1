@@ -74,11 +74,15 @@ function putArrayInStorage(){
 function getArrayFromStorage(){
     let storedImage = localStorage.getItem('images');
     if(storedImage){
-        let newImage = JSON.parse(storedImage);
-        for(let images of newImage){
-            let myNewImage = new Images(images.name, images.imgPath, images.views, images.clicks);
-            Images.allImages.push(myNewImage)
-        }
+    let newImage = JSON.parse(storedImage);
+    Images.allImages = [];
+    for (let obj of newImage) {
+      const path = obj.imgPath || obj.imagepath || '';
+      const item = new Images(obj.name, path);
+      item.views = Number(obj.views) || 0;
+      item.clicks = Number(obj.clicks) || 0;
+      Images.allImages.push(item);
+    }
     }
 }
 //Revomes images
@@ -89,61 +93,50 @@ function removeImages(){
 }
 
 function makeItemChart() {
-  var ctx = document.getElementById('myCanvas').getContext('2d');
-    let imageNames = []
-    let imageClicks = []
-    let imageViews = []
+  const canvas = document.getElementById('myCanvas');
+  if (!canvas) { console.error('makeItemChart: #myCanvas not found'); return; }
+  const ctx = canvas.getContext('2d');
 
+  const imageNames = Images.allImages.map(i => i.name);
+  const imageClicks = Images.allImages.map(i => Number(i.clicks) || 0);
+  const imageViews = Images.allImages.map(i => Number(i.views) || 0);
 
-for(let image of Images.allImages){
-    imageNames.push(image.name);
-    imageClicks.push(image.clicks);
-    imageViews.push(image.views);
-}
-
-const data = {
-  labels: imageNames,
-  datasets: [
-    {
-      label: 'clicks',
-      data: image.Clicks,
-      borderColor: 'rgba(251, 0, 0, 1)',
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-      borderWidth: 1,
-    },
-    {
-      label: 'views',
-      data: image.Views,
-      borderColor: 'rgba(99, 99, 255, 1)',
-      backgroundColor: 'rgba(99, 132, 255, 0.5)',
-      borderWidth: 1,
-    }
-  ]
-};
-
-// Chart configuration
-const config = {
-  type: 'bar',
-  data: data,
-  options: {
-    indexAxis: 'y',
-    elements: {
-      bar: {
-        borderWidth: 2,
-      }
-    },
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'right',
+  const data = {
+    labels: imageNames,
+    datasets: [
+      {
+        label: 'Clicks',
+        data: imageClicks,
+        borderColor: 'rgba(251, 0, 0, 1)',
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        borderWidth: 1,
       },
-      title: {
-        display: true,
-        text: 'Tank Horsepower and Armor Comparison'
+      {
+        label: 'Views',
+        data: imageViews,
+        borderColor: 'rgba(99, 99, 255, 1)',
+        backgroundColor: 'rgba(99, 132, 255, 0.5)',
+        borderWidth: 1,
       }
+    ]
+  };
+
+  const config = {
+    type: 'bar',
+    data: data,
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'right' },
+        title: { display: true, text: 'Image clicks and views' }
+      },
+      scales: { x: { beginAtZero: true } }
     }
-  },
-};
+  };
+
+  if (window._myChart) { try { window._myChart.destroy(); } catch (e) {} }
+  window._myChart = new Chart(ctx, config);
 }
 //Changes/randomizes image
 function handleClick(E){
@@ -161,7 +154,7 @@ function handleClick(E){
         Images.allImages[2].clicks++;
     } 
     getThreeImages(); 
-    if (count === 5){
+    if (count === 35){
         removeImages();
         console.log(Images.allImages);
 
