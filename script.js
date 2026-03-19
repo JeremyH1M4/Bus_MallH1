@@ -161,6 +161,8 @@ function handleClick(E){
         putArrayInStorage();
     getArrayFromStorage();
     makeItemChart();
+document.getElementById('Desc1').style.display = 'none';
+
 }
 }
 
